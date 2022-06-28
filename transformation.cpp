@@ -1,5 +1,5 @@
-#include "Mathgl.h"
-void Mathgl::transform(float** transMat, float** mat, int m, int n)
+#include "transformation.h"
+void Transformation::transform(float** transMat, float** mat, int m, int n)
 {
     float vect[n];
     float updatedVect[n];
@@ -17,7 +17,7 @@ void Mathgl::transform(float** transMat, float** mat, int m, int n)
         }
     }
 }
-void Mathgl::vecMultiply(float** transMat, float* vect, float* res, int n)
+void Transformation::vecMultiply(float** transMat, float* vect, float* res, int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -30,7 +30,7 @@ void Mathgl::vecMultiply(float** transMat, float* vect, float* res, int n)
     }
     return;
 }
-void Mathgl::multiply(float** matA, float** matB, float** res, int n)
+void Transformation::multiply(float** matA, float** matB, float** res, int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -46,7 +46,7 @@ void Mathgl::multiply(float** matA, float** matB, float** res, int n)
     }
     return;
 }
-float** Mathgl::input_mat(int m, int n)
+float** Transformation::input_mat(int m, int n)
 {
     float** mat = create_matrix_of_ones(m, n);
     for (int i = 0; i < m - 1; i++)
@@ -59,7 +59,7 @@ float** Mathgl::input_mat(int m, int n)
     }
     return mat;
 };
-void Mathgl::disp_mat(float** mat, int m, int n)
+void Transformation::disp_mat(float** mat, int m, int n)
 {
     for (int i = 0; i < m; i++)
     {
@@ -70,7 +70,7 @@ void Mathgl::disp_mat(float** mat, int m, int n)
         cout << endl;
     }
 };
-float** Mathgl::get_translation_mat(float* trans, int n)
+float** Transformation::get_translation_mat(float* trans, int n)
 {
     float** transMat = create_imat_of_m_by_n(n, n);
     for (int i = 0; i < n; i++)
@@ -79,7 +79,7 @@ float** Mathgl::get_translation_mat(float* trans, int n)
     }
     return transMat;
 }
-float** Mathgl::get_scale_mat(float* trans, int n)
+float** Transformation::get_scale_mat(float* trans, int n)
 {
     float** scaleMat = create_imat_of_m_by_n(n, n);
     for (int i = 0; i < n; i++)
@@ -88,7 +88,7 @@ float** Mathgl::get_scale_mat(float* trans, int n)
     }
     return scaleMat;
 }
-float** Mathgl::get_rot_mat(float theta, float* axes, int n)
+float** Transformation::get_rot_mat(float theta, float* axes, int n)
 {
     float** rotMat = create_imat_of_m_by_n(n, n);
     theta = theta * (M_PI / 180);
@@ -119,7 +119,7 @@ float** Mathgl::get_rot_mat(float theta, float* axes, int n)
     rotMat[1][2] = y * omc - x * s;
     return rotMat;
 }
-float** Mathgl::create_mat_of_m_by_n(int m, int n)
+float** Transformation::create_mat_of_m_by_n(int m, int n)
 {
     float** mat = new float*[m];
     for (int i = 0; i < m; i++)
@@ -128,7 +128,7 @@ float** Mathgl::create_mat_of_m_by_n(int m, int n)
     }
     return mat;
 }
-float** Mathgl::create_imat_of_m_by_n(int m, int n)
+float** Transformation::create_imat_of_m_by_n(int m, int n)
 {
     float** mat = create_mat_of_m_by_n(m, n);
     for (int i = 0; i < m; i++)
@@ -147,7 +147,7 @@ float** Mathgl::create_imat_of_m_by_n(int m, int n)
     }
     return mat;
 }
-float** Mathgl::create_matrix_of_ones(int m, int n)
+float** Transformation::create_matrix_of_ones(int m, int n)
 {
     float** mat = create_mat_of_m_by_n(m, n);
     for (int i = 0; i < m; i++)
@@ -169,16 +169,16 @@ float** Mathgl::create_matrix_of_ones(int m, int n)
 //    n = n + 1;
 //    m = m + 1;
 //    cout << "Enter for matA: " << endl;
-//    float **matA = Mathgl::input_mat(m, n);
+//    float **matA = Transformation::input_mat(m, n);
 //    cout << "MatA: " << endl;
-//    Mathgl::disp_mat(matA, m, n);
+//    Transformation::disp_mat(matA, m, n);
 //    float t[n];
 //    cout << "Enter translation vector: " << endl;
 //    for (int i = 0; i < n - 1; i++) {
 //      cin >> t[i];
 //    }
 //    t[n - 1] = 1;
-//    float **transMat = Mathgl::get_translation_mat(t, n);
+//    float **transMat = Transformation::get_translation_mat(t, n);
 //
 //    float s[n];
 //    cout << "Enter scale vector: " << endl;
@@ -186,7 +186,7 @@ float** Mathgl::create_matrix_of_ones(int m, int n)
 //      cin >> s[i];
 //    }
 //    s[n - 1] = 1;
-//    float **scaleMat = Mathgl::get_scale_mat(s, n);
+//    float **scaleMat = Transformation::get_scale_mat(s, n);
 //    float **rotMat;
 //    float theta;
 //    cout << "Enter rotation theta in rad: " << endl;
@@ -196,14 +196,14 @@ float** Mathgl::create_matrix_of_ones(int m, int n)
 //    for (int i = 0; i < n - 1; i++) {
 //      cin >> axes[i];
 //    }
-//    rotMat = Mathgl::get_rot_mat(theta, axes, n);
-//    float **composite = Mathgl::create_mat_of_m_by_n(n, n);
-//    Mathgl::multiply(scaleMat, rotMat, composite, n);
-//    Mathgl::multiply(composite, transMat, composite, n);
+//    rotMat = Transformation::get_rot_mat(theta, axes, n);
+//    float **composite = Transformation::create_mat_of_m_by_n(n, n);
+//    Transformation::multiply(scaleMat, rotMat, composite, n);
+//    Transformation::multiply(composite, transMat, composite, n);
 //    cout << "Composite: " << endl;
-//    Mathgl::disp_mat(composite, n, n);
-//    Mathgl::transform(composite, matA, m, n);
+//    Transformation::disp_mat(composite, n, n);
+//    Transformation::transform(composite, matA, m, n);
 //    cout << "Translated matrix: " << endl;
-//    Mathgl::disp_mat(matA, m - 1, n - 1);
+//    Transformation::disp_mat(matA, m - 1, n - 1);
 //    return 0;
 //  }

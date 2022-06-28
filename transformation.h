@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 using namespace std;
-class Mathgl
+class Transformation
 {
 public:
     static float** create_matrix_of_ones(int m, int n);

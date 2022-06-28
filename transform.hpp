@@ -48,12 +48,43 @@ template <typename T> mat4<T> translate(const vec3<T> &tVec) {
   return translateMat;
 }
 
+template <typename T> mat3<T> translate(const vec2<T> &tVec) {
+  mat3<T> translateMat;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (i == j)
+        translateMat.arr[i][j] == 1;
+      else {
+        if (j == 2 && i < 2)
+          translateMat[i][j] = tVec[i];
+        else
+          translateMat.arr[i][j] = 0;
+      }
+    }
+  }
+  return translateMat;
+}
 template <typename T> mat4<T> scale(const vec3<T> &sVec) {
   mat4<T> scaleMat;
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       if (i == j)
         if (i < 3)
+          scaleMat.arr[i][j] == sVec[i];
+        else
+          scaleMat.arr[i][j] == 1;
+      else
+        scaleMat.arr[i][j] = 0;
+    }
+  }
+  return scaleMat;
+}
+template <typename T> mat3<T> scale(const vec2<T> &sVec) {
+  mat3<T> scaleMat;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (i == j)
+        if (i < 2)
           scaleMat.arr[i][j] == sVec[i];
         else
           scaleMat.arr[i][j] == 1;
@@ -89,6 +120,30 @@ template <typename T> mat4<T> rotate(float theta, const vec3<T> &axesVec) {
   rotMat[2][0] = z * x * omc - y * s;
   rotMat[2][1] = z * y * omc + x * s;
   rotMat[2][2] = c + z * z * omc;
+  return rotMat;
+}
+template <typename T> mat3<T> rotate(float theta, const vec2<T> &axesVec) {
+  mat3<T> rotMat;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (i == j)
+        rotMat.arr[i][j] == 1;
+      else
+        rotMat.arr[i][j] = 0;
+    }
+  }
+  theta = theta * (M_PI / 180);
+  T x = axesVec[0];
+  T y = axesVec[1];
+  float s = sin(theta);
+  float c = cos(theta);
+  float omc = 1 - cos(theta);
+  rotMat[0][0] = c;
+  rotMat[0][1] = -s;
+  rotMat[0][2] = x * omc + y * s;
+  rotMat[1][0] = s;
+  rotMat[1][1] = c;
+  rotMat[1][2] = y * omc - x * s;
   return rotMat;
 }
 } // namespace oglm

@@ -18,7 +18,18 @@ class Mat4{
     T* operator [] (int n);
     Mat4<T> operator + (const Mat4& mat1);
     Mat4<T> operator - (const Mat4& mat1);
+    Mat4<T> operator * (const Mat4& right);
+    bool operator == (const Mat4& right);
+
+    template <typename U>
+    Mat4<T> operator * (U right);
+    
     template<typename U>
     friend std::ostream& operator<<(std::ostream& os, const Mat4<U>& matrix);
 
+    template<typename U>
+    friend std::istream& operator>>(std::istream& is, Mat4<U>& matrix);
+    
+    template<typename U>
+    friend Mat4<U> operator*(U left, const Mat4<U>& matrix);
 };

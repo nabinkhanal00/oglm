@@ -1,5 +1,8 @@
 #pragma once
-
+#include <iostream>
+#include <cmath>
+#include "vec2.hpp"
+#include "vec3.hpp"
 template <class T>
 class Mat4{
     private:

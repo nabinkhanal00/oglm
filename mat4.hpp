@@ -1,5 +1,8 @@
 #pragma once
-
+#include <iostream>
+#include <cmath>
+#include "vec2.hpp"
+#include "vec3.hpp"
 template <class T>
 class Mat4{
     private:
@@ -13,6 +16,7 @@ class Mat4{
         T d1, T d2, T d3, T d4
     );
 
+    Mat4(T data);
     Mat4();
 
     T* operator [] (int n);

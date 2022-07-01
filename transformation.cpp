@@ -1,44 +1,34 @@
 #include "transformation.h"
-void Transformation::transform(float** transMat, float** mat, int m, int n)
-{
+void Transformation::transform(float** transMat, float** mat, int m, int n) {
     float vect[n];
     float updatedVect[n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
             vect[j] = mat[i][j];
         }
 
         vecMultiply(transMat, vect, updatedVect, n);
-        for (int k = 0; k < n; k++)
-        {
+        for (int k = 0; k < n; k++) {
             mat[i][k] = updatedVect[k];
         }
     }
 }
-void Transformation::vecMultiply(float** transMat, float* vect, float* res, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
+void Transformation::vecMultiply(float** transMat, float* vect, float* res,
+                                 int n) {
+    for (int i = 0; i < n; i++) {
         float sum = 0;
-        for (int k = 0; k < n; k++)
-        {
+        for (int k = 0; k < n; k++) {
             sum += (transMat[i][k] * vect[k]);
         }
         res[i] = sum;
     }
     return;
 }
-void Transformation::multiply(float** matA, float** matB, float** res, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
+void Transformation::multiply(float** matA, float** matB, float** res, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             float sum = 0;
-            for (int k = 0; k < n; k++)
-            {
+            for (int k = 0; k < n; k++) {
                 sum += (matA[i][k] * matB[k][j]);
             }
             res[i][j] = sum;
@@ -46,50 +36,39 @@ void Transformation::multiply(float** matA, float** matB, float** res, int n)
     }
     return;
 }
-float** Transformation::input_mat(int m, int n)
-{
+float** Transformation::input_mat(int m, int n) {
     float** mat = create_matrix_of_ones(m, n);
-    for (int i = 0; i < m - 1; i++)
-    {
-        for (int j = 0; j < n - 1; j++)
-        {
+    for (int i = 0; i < m - 1; i++) {
+        for (int j = 0; j < n - 1; j++) {
             cin >> mat[i][j];
         }
         cout << endl;
     }
     return mat;
 };
-void Transformation::disp_mat(float** mat, int m, int n)
-{
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
+void Transformation::disp_mat(float** mat, int m, int n) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
             cout << mat[i][j] << " ";
         }
         cout << endl;
     }
 };
-float** Transformation::get_translation_mat(float* trans, int n)
-{
+float** Transformation::get_translation_mat(float* trans, int n) {
     float** transMat = create_imat_of_m_by_n(n, n);
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         transMat[i][n - 1] = trans[i];
     }
     return transMat;
 }
-float** Transformation::get_scale_mat(float* trans, int n)
-{
+float** Transformation::get_scale_mat(float* trans, int n) {
     float** scaleMat = create_imat_of_m_by_n(n, n);
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         scaleMat[i][i] = trans[i];
     }
     return scaleMat;
 }
-float** Transformation::get_rot_mat(float theta, float* axes, int n)
-{
+float** Transformation::get_rot_mat(float theta, float* axes, int n) {
     float** rotMat = create_imat_of_m_by_n(n, n);
     theta = theta * (M_PI / 180);
     float x = axes[0];
@@ -97,8 +76,7 @@ float** Transformation::get_rot_mat(float theta, float* axes, int n)
     float s = sin(theta);
     float c = cos(theta);
     float omc = 1 - cos(theta);
-    if (n == 3)
-    {
+    if (n == 3) {
         float z = axes[2];
         rotMat[0][0] = c + x * x * omc;
         rotMat[0][1] = x * y * omc - z * s;
@@ -119,41 +97,30 @@ float** Transformation::get_rot_mat(float theta, float* axes, int n)
     rotMat[1][2] = y * omc - x * s;
     return rotMat;
 }
-float** Transformation::create_mat_of_m_by_n(int m, int n)
-{
+float** Transformation::create_mat_of_m_by_n(int m, int n) {
     float** mat = new float*[m];
-    for (int i = 0; i < m; i++)
-    {
+    for (int i = 0; i < m; i++) {
         mat[i] = new float[n];
     }
     return mat;
 }
-float** Transformation::create_imat_of_m_by_n(int m, int n)
-{
+float** Transformation::create_imat_of_m_by_n(int m, int n) {
     float** mat = create_mat_of_m_by_n(m, n);
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (i == j)
-            {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) {
                 mat[i][j] = 1;
-            }
-            else
-            {
+            } else {
                 mat[i][j] = 0;
             }
         }
     }
     return mat;
 }
-float** Transformation::create_matrix_of_ones(int m, int n)
-{
+float** Transformation::create_matrix_of_ones(int m, int n) {
     float** mat = create_mat_of_m_by_n(m, n);
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
             mat[i][j] = 1;
         }
     }

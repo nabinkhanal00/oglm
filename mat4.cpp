@@ -6,6 +6,24 @@ template<class T>
 Mat4<T>::Mat4(){}
 
 template<class T>
+Mat4<T>::Mat4(T data){
+    if(data == 0){
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                if(i == j) _mat[i][j] = 1;
+                else _mat[i][j] = 0;
+            }
+        }
+    }else if(data == 1){
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                _mat[i][j] = 1;
+            }
+        }
+    }
+}
+
+template<class T>
 Mat4<T>::Mat4(
         T a1, T a2, T a3, T a4,
         T b1, T b2, T b3, T b4,

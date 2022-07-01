@@ -1,5 +1,4 @@
 #include "oglm.hpp"
-
 namespace oglm {
 template <typename T>
 mat4<T> lookAt(const vec3<T>& eye, const vec3<T>& towards, const vec3<T>& up) {
@@ -31,6 +30,17 @@ mat4<T> lookAt(const vec3<T>& eye, const vec3<T>& towards, const vec3<T>& up) {
     return result;
 }
 
+template <typename T> mat4<T> perspective(T fov, T aspect, T near, T far) {
+    mat4<T> result(1);
+    T const rad = fov;
+    T const tanHalfFov = tan(rad / static_cast<T>(2)); // tanHalfFov == theta/2
+    result.arr[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);
+    result.arr[1][1] = static_cast<T>(1) / (tanHalfFov);
+    result.arr[2][2] = -(far + near) / (far - near);
+    result.arr[2][3] = -static_cast<T>(1);
+    result.arr[3][2] = -(static_cast<T>(2) * far * near) / (far - near);
+    return result;
+}
 template <typename T> mat4<T> translate(const vec3<T>& tVec) {
     mat4<T> translateMat;
     for (int i = 0; i < 4; i++) {

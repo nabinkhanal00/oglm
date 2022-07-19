@@ -5,11 +5,11 @@
 
 namespace oglm {
 
-template <typename T> class vec2 {
+template <typename T = float> class vec2 {
   public:
-	vec2() : arr(0, 0), x(arr[0]), y(arr[1]) {}
+	vec2() : x(0), y(0) {}
 
-	vec2(T e0, T e1) : arr(e0, e1), x(arr[0]), y(arr[1]) {}
+	vec2(T e0, T e1) : x(e0), y(e1) {}
 
 	vec2 operator-() const { return vec2(-x, -y); }
 
@@ -57,11 +57,8 @@ template <typename T> class vec2 {
 
 	T length_squared() const { return x * x + y * y; }
 
-	T &operator[](const unsigned int &i) { return arr[i]; }
-
   public:
-	T arr[2];
-	T &x, y;
+	T x, y;
 };
 
 template <typename T>

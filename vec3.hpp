@@ -6,7 +6,7 @@
 
 namespace oglm {
 
-template <typename T> class vec3 {
+template <typename T = float> class vec3 {
   public:
 	vec3() : arr{0, 0, 0}, x(arr[0]), y(arr[1]), z(arr[2]) {}
 
@@ -97,7 +97,6 @@ template <typename T> static vec3<T> normalize(const vec3<T> &u) {
 	T oneOverLength = (T)1 / u.length();
 	return oneOverLength * vec3<T>(u.x, u.y, u.z);
 }
-
 
 using vec3i = vec3<int>;
 using vec3f = vec3<float>;

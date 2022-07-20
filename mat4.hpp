@@ -18,7 +18,7 @@ template <class T> class mat4 {
 		}
 	}
 
-	T *operator[](int n) { return _mat[n]; }
+	T* operator[](int n) { return _mat[n]; }
 
 	mat4<T> operator+(const mat4 &mat1) {
 		mat4 sum;

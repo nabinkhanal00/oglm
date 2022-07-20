@@ -42,17 +42,18 @@ template <typename T> mat4<T> perspective(T fov, T aspect, T near, T far) {
     return result;
 }
 
-template <typename T> mat4<T> translate(const vec3<T>& tVec) {
+template <typename T> mat4<T> translate(const vec3<T> tVec) {
     mat4<T> translateMat;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (i == j)
-                translateMat.arr[i][j] == 1;
+                translateMat[i][j] == 1;
             else {
                 if (j == 3 && i < 3)
+
                     translateMat[i][j] = tVec[i];
                 else
-                    translateMat.arr[i][j] = 0;
+                    translateMat[i][j] = 0;
             }
         }
     }

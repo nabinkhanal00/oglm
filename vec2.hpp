@@ -19,6 +19,13 @@ template <typename T = float> class vec2 {
 		return *this;
 	}
 
+  T & operator[](const int &i){
+    if(i == 0)
+      return x;
+    if(i == 1)
+      return y;
+    throw "Index out of range";
+  }
 	vec2 &operator+=(const vec2 &v) {
 		x += v.x;
 		y += v.y;

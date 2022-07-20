@@ -52,11 +52,11 @@ template <typename T = float> class vec3 {
 
 	T &operator[](const unsigned int &i) {
 		if (i == 0)
-			return &x;
+			return x;
 		else if (i == 1)
-			return &y;
+			return y;
 		else if (i == 2)
-			return &z;
+			return z;
 		else
 			throw("Index out of range");
 	}

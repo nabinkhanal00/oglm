@@ -7,25 +7,25 @@ mat4<T> lookAt(const vec3<T>& eye, const vec3<T>& towards, const vec3<T>& up) {
     vec3<T> upDir = cross(rightDir, forwardDir);
 
     mat4<T> result;
-    result.arr[0][0] = rightDir.x;
-    result.arr[1][0] = rightDir.y;
-    result.arr[2][0] = rightDir.z;
-    result.arr[3][0] = -dot(rightDir, eye);
+    result[0][0] = rightDir.x;
+    result[1][0] = rightDir.y;
+    result[2][0] = rightDir.z;
+    result[3][0] = -dot(rightDir, eye);
 
-    result.arr[0][1] = upDir.x;
-    result.arr[1][1] = upDir.y;
-    result.arr[2][1] = upDir.z;
-    result.arr[3][1] = -dot(upDir, eye);
+    result[0][1] = upDir.x;
+    result[1][1] = upDir.y;
+    result[2][1] = upDir.z;
+    result[3][1] = -dot(upDir, eye);
 
-    result.arr[0][2] = -forwardDir.x;
-    result.arr[1][2] = -forwardDir.y;
-    result.arr[2][2] = -forwardDir.z;
-    result.arr[3][2] = dot(forwardDir, eye);
+    result[0][2] = -forwardDir.x;
+    result[1][2] = -forwardDir.y;
+    result[2][2] = -forwardDir.z;
+    result[3][2] = dot(forwardDir, eye);
 
-    result.arr[0][3] = 0;
-    result.arr[1][3] = 0;
-    result.arr[2][3] = 0;
-    result.arr[3][3] = 1;
+    result[0][3] = 0;
+    result[1][3] = 0;
+    result[2][3] = 0;
+    result[3][3] = 1;
 
     return result;
 }
@@ -34,13 +34,14 @@ template <typename T> mat4<T> perspective(T fov, T aspect, T near, T far) {
     mat4<T> result(1);
     T const rad = fov;
     T const tanHalfFov = tan(rad / static_cast<T>(2)); // tanHalfFov == theta/2
-    result.arr[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);
-    result.arr[1][1] = static_cast<T>(1) / (tanHalfFov);
-    result.arr[2][2] = -(far + near) / (far - near);
-    result.arr[2][3] = -static_cast<T>(1);
-    result.arr[3][2] = -(static_cast<T>(2) * far * near) / (far - near);
+    result[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);
+    result[1][1] = static_cast<T>(1) / (tanHalfFov);
+    result[2][2] = -(far + near) / (far - near);
+    result[2][3] = -static_cast<T>(1);
+    result[3][2] = -(static_cast<T>(2) * far * near) / (far - near);
     return result;
 }
+
 template <typename T> mat4<T> translate(const vec3<T>& tVec) {
     mat4<T> translateMat;
     for (int i = 0; i < 4; i++) {

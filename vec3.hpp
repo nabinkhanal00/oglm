@@ -8,15 +8,9 @@ namespace oglm {
 
 template <typename T = float> class vec3 {
   public:
-	vec3() : arr{0, 0, 0}, x(arr[0]), y(arr[1]), z(arr[2]) {}
+	vec3() : x(0), y(0), z(0) {}
 
-	vec3(T e0, T e1, T e2) : arr{e0, e1, e2}, x(arr[0]), y(arr[1]), z(arr[2]) {}
-
-	vec3(T e, const vec2<T> &v)
-	    : arr(e, v.x, v.y), x(arr[0]), y(arr[1]), z(arr[2]) {}
-
-	vec3(const vec2<T> &v, T e)
-	    : arr(v.x, v.y, e), x(arr[0]), y(arr[1]), z(arr[2]) {}
+	vec3(T e0, T e1, T e2) : x(e0), y(e1), z(e2) {}
 
 	vec3 operator-() const { return vec3(-x, -y, -z); }
 
@@ -56,11 +50,19 @@ template <typename T = float> class vec3 {
 
 	T length_squared() const { return x * x + y * y + z * z; }
 
-	T &operator[](const unsigned int &i) { return arr[i]; }
+	T &operator[](const unsigned int &i) {
+		if (i == 0)
+			return &x;
+		else if (i == 1)
+			return &y;
+		else if (i == 2)
+			return &z;
+		else
+			throw("Index out of range");
+	}
 
   public:
-	T arr[3];
-	T &x, &y, &z;
+	T x, y, z;
 };
 
 template <typename T>

@@ -7,31 +7,11 @@ template <class T> class mat4 {
 	T _mat[4][4];
 
   public:
-	mat4(T a1, T a2, T a3, T a4, T b1, T b2, T b3, T b4, T c1, T c2, T c3, T c4,
-	     T d1, T d2, T d3, T d4) {
-		_mat[0][0] = a1;
-		_mat[0][1] = a2;
-		_mat[0][2] = a3;
-		_mat[0][3] = a4;
-		_mat[1][0] = b1;
-		_mat[1][1] = b2;
-		_mat[1][2] = b3;
-		_mat[1][3] = b4;
-		_mat[2][0] = c1;
-		_mat[2][1] = c2;
-		_mat[2][2] = c3;
-		_mat[2][3] = c4;
-		_mat[3][0] = d1;
-		_mat[3][1] = d2;
-		_mat[3][2] = d3;
-		_mat[3][3] = d4;
-	}
-
-	mat4(T d) {
+	mat4(T d = 1) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (i == j)
-					_mat[i][j] = 1;
+					_mat[i][j] = d;
 				else
 					_mat[i][j] = 0;
 			}

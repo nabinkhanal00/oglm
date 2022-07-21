@@ -51,6 +51,18 @@ template <typename T = float> class _vec4 {
 
 	T length_squared() const { return x * x + y * y + z * z + w * w; }
 
+	const T &operator[](const unsigned int &i) const {
+		if (i == 0)
+			return x;
+		else if (i == 1)
+			return y;
+		else if (i == 2)
+			return z;
+		else if (i == 3)
+			return w;
+		else
+			throw("Index out of range");
+	}
 	T &operator[](const unsigned int &i) {
 		if (i == 0)
 			return x;

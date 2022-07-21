@@ -50,7 +50,7 @@ template <typename T = float> class vec3 {
 
 	T length_squared() const { return x * x + y * y + z * z; }
 
-	T &operator[](const unsigned int &i) {
+	T operator[](const unsigned int i) {
 		if (i == 0)
 			return x;
 		else if (i == 1)

@@ -1,4 +1,9 @@
-#include "oglm.hpp"
+#pragma once
+#include "vec4.hpp"
+#include "vec3.hpp"
+#include "mat4.hpp"
+#include "mat3.hpp"
+
 namespace oglm {
 template <typename T>
 mat4<T> lookAt(const vec3<T>& eye, const vec3<T>& towards, const vec3<T>& up) {
@@ -42,12 +47,12 @@ template <typename T> mat4<T> perspective(T fov, T aspect, T near, T far) {
     return result;
 }
 
-template <typename T> mat4<T> translate(const vec3<T> tVec) {
+template <typename T> mat4<T> translate(vec3<T> tVec) {
     mat4<T> translateMat;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (i == j)
-                translateMat[i][j] == 1;
+                translateMat[i][j] = 1;
             else {
                 if (j == 3 && i < 3)
 
@@ -60,60 +65,60 @@ template <typename T> mat4<T> translate(const vec3<T> tVec) {
     return translateMat;
 }
 
-template <typename T> mat3<T> translate(const vec2<T>& tVec) {
+template <typename T> mat3<T> translate(vec2<T>& tVec) {
     mat3<T> translateMat;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (i == j)
-                translateMat.arr[i][j] == 1;
+                translateMat[i][j] = 1;
             else {
                 if (j == 2 && i < 2)
                     translateMat[i][j] = tVec[i];
                 else
-                    translateMat.arr[i][j] = 0;
+                    translateMat[i][j] = 0;
             }
         }
     }
     return translateMat;
 }
-template <typename T> mat4<T> scale(const vec3<T>& sVec) {
+template <typename T> mat4<T> scale(vec3<T>& sVec) {
     mat4<T> scaleMat;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (i == j)
                 if (i < 3)
-                    scaleMat.arr[i][j] == sVec[i];
+                    scaleMat[i][j] = sVec[i];
                 else
-                    scaleMat.arr[i][j] == 1;
+                    scaleMat[i][j] = 1;
             else
-                scaleMat.arr[i][j] = 0;
+                scaleMat[i][j] = 0;
         }
     }
     return scaleMat;
 }
-template <typename T> mat3<T> scale(const vec2<T>& sVec) {
+template <typename T> mat3<T> scale(vec2<T>& sVec) {
     mat3<T> scaleMat;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (i == j)
                 if (i < 2)
-                    scaleMat.arr[i][j] == sVec[i];
+                    scaleMat[i][j] = sVec[i];
                 else
-                    scaleMat.arr[i][j] == 1;
+                    scaleMat[i][j] = 1;
             else
-                scaleMat.arr[i][j] = 0;
+                scaleMat[i][j] = 0;
         }
     }
     return scaleMat;
 }
-template <typename T> mat4<T> rotate(float theta, const vec3<T>& axesVec) {
+template <typename T> mat4<T> rotate(float theta, vec3<T>& axesVec) {
     mat4<T> rotMat;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (i == j)
-                rotMat.arr[i][j] == 1;
+                rotMat[i][j] = 1;
             else
-                rotMat.arr[i][j] = 0;
+                rotMat[i][j] = 0;
         }
     }
     theta = theta * (M_PI / 180);
@@ -139,9 +144,9 @@ template <typename T> mat3<T> rotate(float theta, const vec2<T>& axesVec) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (i == j)
-                rotMat.arr[i][j] == 1;
+                rotMat[i][j] = 1;
             else
-                rotMat.arr[i][j] = 0;
+                rotMat[i][j] = 0;
         }
     }
     theta = theta * (M_PI / 180);

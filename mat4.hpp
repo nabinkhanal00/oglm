@@ -1,4 +1,5 @@
 #pragma once
+#include "vec4.hpp"
 #include <iostream>
 #include <vector>
 namespace oglm {
@@ -71,20 +72,20 @@ template <class T> class mat4 {
 		return result;
 	}
 
-	std::vector<T> operator*(const std::vector<T> right) {
-		std::vector<T> result;
+	vec4<T> operator*(vec4<T> right) {
+		vec4<T> result;
 		for (int i = 0; i < 4; i++) {
 			T sum = 0;
 			for (int j = 0; j < 4; j++) {
 				sum += _mat[i][j] * right[j];
 			}
-			result.push_back(sum);
+		  result[i] = sum;	
 		}
 
 		return result;
 	}
 
-	mat4<T> operator*(const mat4<T> &right) {
+	mat4<T> operator*(mat4<T> &right) {
 		mat4<T> result;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {

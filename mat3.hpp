@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include "vec3.hpp"
 namespace oglm {
 template <class T> class mat3 {
   private:
@@ -71,14 +71,14 @@ template <class T> class mat3 {
 		return result;
 	}
 
-	std::vector<T> operator*(const std::vector<T> right) {
-		std::vector<T> result;
+	_vec3<T> operator*(const _vec3<T> &right) {
+		_vec3<T> result;
 		for (int i = 0; i < 3; i++) {
 			T sum = 0;
 			for (int j = 0; j < 3; j++) {
 				sum += _mat[i][j] * right[j];
 			}
-			result.push_back(sum);
+			result[i] = sum;
 		}
 
 		return result;

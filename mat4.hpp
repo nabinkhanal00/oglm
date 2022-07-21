@@ -1,7 +1,6 @@
 #pragma once
 #include "vec4.hpp"
 #include <iostream>
-#include <vector>
 namespace oglm {
 template <class T> class mat4 {
   private:
@@ -19,7 +18,7 @@ template <class T> class mat4 {
 		}
 	}
 
-	T* operator[](int n) { return _mat[n]; }
+	T *operator[](int n) { return _mat[n]; }
 
 	mat4<T> operator+(const mat4 &mat1) {
 		mat4 sum;
@@ -72,14 +71,14 @@ template <class T> class mat4 {
 		return result;
 	}
 
-	vec4<T> operator*(vec4<T> right) {
-		vec4<T> result;
+	_vec4<T> operator*(const _vec4<T> &right) {
+		_vec4<T> result;
 		for (int i = 0; i < 4; i++) {
 			T sum = 0;
 			for (int j = 0; j < 4; j++) {
 				sum += _mat[i][j] * right[j];
 			}
-		  result[i] = sum;	
+			result[i] = sum;
 		}
 
 		return result;

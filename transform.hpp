@@ -49,7 +49,7 @@ template <typename T> mat4<T> perspective(T fov, T aspect, T near, T far) {
 	return result;
 }
 
-template <typename T> mat4<T> translate(_vec3<T> tVec) {
+template <typename T> mat4<T> translate(const _vec3<T> tVec) {
 	mat4<T> translateMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -67,7 +67,7 @@ template <typename T> mat4<T> translate(_vec3<T> tVec) {
 	return translateMat;
 }
 
-template <typename T> mat3<T> translate(_vec2<T> &tVec) {
+template <typename T> mat3<T> translate(const _vec2<T> &tVec) {
 	mat3<T> translateMat;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -83,7 +83,7 @@ template <typename T> mat3<T> translate(_vec2<T> &tVec) {
 	}
 	return translateMat;
 }
-template <typename T> mat4<T> scale(_vec3<T> &sVec) {
+template <typename T> mat4<T> scale(const _vec3<T> &sVec) {
 	mat4<T> scaleMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -98,7 +98,7 @@ template <typename T> mat4<T> scale(_vec3<T> &sVec) {
 	}
 	return scaleMat;
 }
-template <typename T> mat3<T> scale(_vec2<T> const &sVec) {
+template <typename T> mat3<T> scale(const _vec2<T> &sVec) {
 	mat3<T> scaleMat;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -113,7 +113,7 @@ template <typename T> mat3<T> scale(_vec2<T> const &sVec) {
 	}
 	return scaleMat;
 }
-template <typename T> mat4<T> rotate(float theta, _vec3<T> &axesVec) {
+template <typename T> mat4<T> rotate(float theta, const _vec3<T> &axesVec) {
 	mat4<T> rotMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {

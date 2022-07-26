@@ -114,7 +114,8 @@ template <typename T> mat3<T> scale(const _vec2<T> &sVec) {
 	}
 	return scaleMat;
 }
-template <typename T> mat4<T> rotate(float theta, const _vec3<T> &axesVec) {
+template <typename T>
+mat4<T> rotate(const float &theta, const _vec3<T> &axesVec) {
 	mat4<T> rotMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -124,7 +125,6 @@ template <typename T> mat4<T> rotate(float theta, const _vec3<T> &axesVec) {
 				rotMat[i][j] = 0;
 		}
 	}
-	theta = theta * (M_PI / 180);
 	T x = axesVec[0];
 	T y = axesVec[1];
 	T z = axesVec[2];
@@ -142,7 +142,8 @@ template <typename T> mat4<T> rotate(float theta, const _vec3<T> &axesVec) {
 	rotMat[2][2] = c + z * z * omc;
 	return rotMat;
 }
-template <typename T> mat3<T> rotate(float theta, const _vec2<T> &axesVec) {
+template <typename T>
+mat3<T> rotate(const float &theta, const _vec2<T> &axesVec) {
 	mat3<T> rotMat;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -152,7 +153,6 @@ template <typename T> mat3<T> rotate(float theta, const _vec2<T> &axesVec) {
 				rotMat[i][j] = 0;
 		}
 	}
-	theta = theta * (M_PI / 180);
 	T x = axesVec[0];
 	T y = axesVec[1];
 	float s = sin(theta);

@@ -2,12 +2,12 @@
 #include "vec4.hpp"
 #include <iostream>
 namespace oglm {
-template <class T> class mat4 {
+template <class T> class _mat4 {
   private:
 	T _mat[4][4];
 
   public:
-	mat4(T d = 1) {
+	_mat4(T d = 1) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (i == j)
@@ -20,8 +20,8 @@ template <class T> class mat4 {
 
 	T *operator[](int n) { return _mat[n]; }
 
-	mat4<T> operator+(const mat4 &mat1) {
-		mat4 sum;
+	_mat4<T> operator+(const _mat4 &mat1) {
+		_mat4 sum;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				sum[i][j] = mat1._mat[i][j] + this->_mat[i][j];
@@ -31,8 +31,8 @@ template <class T> class mat4 {
 		return sum;
 	}
 
-	mat4<T> operator-(const mat4 &mat1) {
-		mat4 diff;
+	_mat4<T> operator-(const _mat4 &mat1) {
+		_mat4 diff;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				diff[i][j] = this->_mat[i][j] - mat1._mat[i][j];
@@ -42,7 +42,7 @@ template <class T> class mat4 {
 		return diff;
 	}
 
-	friend std::ostream &operator<<(std::ostream &os, const mat4<T> &matrix) {
+	friend std::ostream &operator<<(std::ostream &os, const _mat4<T> &matrix) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				os << matrix._mat[i][j] << "\t";
@@ -52,7 +52,7 @@ template <class T> class mat4 {
 		return os;
 	}
 
-	friend std::istream &operator>>(std::istream &is, mat4<T> &matrix) {
+	friend std::istream &operator>>(std::istream &is, _mat4<T> &matrix) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				is >> matrix._mat[i][j];
@@ -61,8 +61,8 @@ template <class T> class mat4 {
 		return is;
 	}
 
-	mat4<T> operator*(const T left) {
-		mat4<T> result;
+	_mat4<T> operator*(const T left) {
+		_mat4<T> result;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				result[i][j] = left * _mat[i][j];
@@ -84,8 +84,8 @@ template <class T> class mat4 {
 		return result;
 	}
 
-	mat4<T> operator*(mat4<T> &right) {
-		mat4<T> result;
+	_mat4<T> operator*(_mat4<T> &right) {
+		_mat4<T> result;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				T total = 0;
@@ -99,7 +99,7 @@ template <class T> class mat4 {
 		return result;
 	}
 
-	bool operator==(const mat4 &right) {
+	bool operator==(const _mat4 &right) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (right._mat[i][j] != _mat[i][j])
@@ -110,4 +110,9 @@ template <class T> class mat4 {
 		return true;
 	}
 };
+
+using mat4 = _mat4<float>;
+using mat4f = _mat4<float>;
+using mat4i = _mat4<int>;
+using mat4u = _mat4<unsigned int>;
 } // namespace oglm

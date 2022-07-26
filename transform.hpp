@@ -44,8 +44,9 @@ template <typename T> mat4<T> perspective(T fov, T aspect, T near, T far) {
 	result[0][0] = static_cast<T>(1) / (aspect * tanHalfFov);
 	result[1][1] = static_cast<T>(1) / (tanHalfFov);
 	result[2][2] = -(far + near) / (far - near);
-	result[2][3] = -static_cast<T>(1);
-	result[3][2] = -(static_cast<T>(2) * far * near) / (far - near);
+	result[3][3] = 0;
+	result[3][2] = -static_cast<T>(1);
+	result[2][3] = -(static_cast<T>(2) * far * near) / (far - near);
 	return result;
 }
 

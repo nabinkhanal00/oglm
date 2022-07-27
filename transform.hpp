@@ -115,8 +115,8 @@ template <typename T> _mat3<T> scale(const _vec2<T> &sVec) {
 	return scaleMat;
 }
 template <typename T>
-_mat4<T> rotate(const float &theta, const _vec3<T> &axesVec) {
-	axesVec = oglm::normalize(axesVec);
+_mat4<T> rotate(const float &theta, const _vec3<T> &_axesVec) {
+	vec3 axesVec = normalize(_axesVec);
 	_mat4<T> rotMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -144,8 +144,8 @@ _mat4<T> rotate(const float &theta, const _vec3<T> &axesVec) {
 	return rotMat;
 }
 template <typename T>
-_mat3<T> rotate(const float &theta, const _vec2<T> &axesVec) {
-	axesVec = oglm::normalize(axesVec);
+_mat3<T> rotate(const float &theta, const _vec2<T> &_axesVec) {
+	vec3 axesVec = normalize(_axesVec);
 	_mat3<T> rotMat;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {

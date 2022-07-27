@@ -7,8 +7,8 @@
 
 namespace oglm {
 template <typename T>
-_mat4<T> lookAt(const _vec3<T> &eye, const _vec3<T> &towards,
-                const _vec3<T> &up) {
+inline _mat4<T> lookAt(const _vec3<T> &eye, const _vec3<T> &towards,
+                       const _vec3<T> &up) {
 	_vec3<T> forwardDir = normalize(towards - eye);
 	_vec3<T> rightDir = cross(forwardDir, normalize(up));
 	_vec3<T> upDir = cross(rightDir, forwardDir);
@@ -37,7 +37,8 @@ _mat4<T> lookAt(const _vec3<T> &eye, const _vec3<T> &towards,
 	return result;
 }
 
-template <typename T> _mat4<T> perspective(T fov, T aspect, T near, T far) {
+template <typename T>
+inline _mat4<T> perspective(T fov, T aspect, T near, T far) {
 	_mat4<T> result(1);
 	T const rad = fov;
 	T const tanHalfFov = tan(rad / static_cast<T>(2)); // tanHalfFov == theta/2
@@ -50,7 +51,7 @@ template <typename T> _mat4<T> perspective(T fov, T aspect, T near, T far) {
 	return result;
 }
 
-template <typename T> _mat4<T> translate(const _vec3<T> tVec) {
+template <typename T> inline _mat4<T> translate(const _vec3<T> tVec) {
 	_mat4<T> translateMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -68,7 +69,7 @@ template <typename T> _mat4<T> translate(const _vec3<T> tVec) {
 	return translateMat;
 }
 
-template <typename T> _mat3<T> translate(const _vec2<T> &tVec) {
+template <typename T> inline _mat3<T> translate(const _vec2<T> &tVec) {
 	_mat3<T> translateMat;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -84,7 +85,7 @@ template <typename T> _mat3<T> translate(const _vec2<T> &tVec) {
 	}
 	return translateMat;
 }
-template <typename T> _mat4<T> scale(const _vec3<T> &sVec) {
+template <typename T> inline _mat4<T> scale(const _vec3<T> &sVec) {
 	_mat4<T> scaleMat;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -99,7 +100,7 @@ template <typename T> _mat4<T> scale(const _vec3<T> &sVec) {
 	}
 	return scaleMat;
 }
-template <typename T> _mat3<T> scale(const _vec2<T> &sVec) {
+template <typename T> inline _mat3<T> scale(const _vec2<T> &sVec) {
 	_mat3<T> scaleMat;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -115,7 +116,7 @@ template <typename T> _mat3<T> scale(const _vec2<T> &sVec) {
 	return scaleMat;
 }
 template <typename T>
-_mat4<T> rotate(const float &theta, const _vec3<T> &_axesVec) {
+inline _mat4<T> rotate(const float &theta, const _vec3<T> &_axesVec) {
 	vec3 axesVec = normalize(_axesVec);
 	_mat4<T> rotMat;
 	for (int i = 0; i < 4; i++) {
@@ -144,7 +145,7 @@ _mat4<T> rotate(const float &theta, const _vec3<T> &_axesVec) {
 	return rotMat;
 }
 template <typename T>
-_mat3<T> rotate(const float &theta, const _vec2<T> &_axesVec) {
+inline _mat3<T> rotate(const float &theta, const _vec2<T> &_axesVec) {
 	vec3 axesVec = normalize(_axesVec);
 	_mat3<T> rotMat;
 	for (int i = 0; i < 3; i++) {

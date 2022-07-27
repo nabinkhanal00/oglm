@@ -7,7 +7,7 @@ template <class T> class _mat4 {
 	T _mat[4][4];
 
   public:
-	_mat4(T d = 1) {
+	inline _mat4(T d = 1) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (i == j)
@@ -18,9 +18,9 @@ template <class T> class _mat4 {
 		}
 	}
 
-	T *operator[](int n) { return _mat[n]; }
+	inline T *operator[](int n) { return _mat[n]; }
 
-	_mat4<T> operator+(const _mat4 &mat1) {
+	inline _mat4<T> operator+(const _mat4 &mat1) {
 		_mat4 sum;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -31,7 +31,7 @@ template <class T> class _mat4 {
 		return sum;
 	}
 
-	_mat4<T> operator-(const _mat4 &mat1) {
+	inline _mat4<T> operator-(const _mat4 &mat1) {
 		_mat4 diff;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -42,7 +42,8 @@ template <class T> class _mat4 {
 		return diff;
 	}
 
-	friend std::ostream &operator<<(std::ostream &os, const _mat4<T> &matrix) {
+	inline friend std::ostream &operator<<(std::ostream &os,
+	                                       const _mat4<T> &matrix) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				os << matrix._mat[i][j] << "\t";
@@ -52,7 +53,7 @@ template <class T> class _mat4 {
 		return os;
 	}
 
-	friend std::istream &operator>>(std::istream &is, _mat4<T> &matrix) {
+	inline friend std::istream &operator>>(std::istream &is, _mat4<T> &matrix) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				is >> matrix._mat[i][j];
@@ -61,7 +62,7 @@ template <class T> class _mat4 {
 		return is;
 	}
 
-	_mat4<T> operator*(const T left) {
+	inline _mat4<T> operator*(const T left) {
 		_mat4<T> result;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -71,7 +72,7 @@ template <class T> class _mat4 {
 		return result;
 	}
 
-	_vec4<T> operator*(const _vec4<T> &right) {
+	inline _vec4<T> operator*(const _vec4<T> &right) {
 		_vec4<T> result;
 		for (int i = 0; i < 4; i++) {
 			T sum = 0;
@@ -84,7 +85,7 @@ template <class T> class _mat4 {
 		return result;
 	}
 
-	_mat4<T> operator*(_mat4<T> &right) {
+	inline _mat4<T> operator*(_mat4<T> &right) {
 		_mat4<T> result;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -99,7 +100,7 @@ template <class T> class _mat4 {
 		return result;
 	}
 
-	bool operator==(const _mat4 &right) {
+	inline bool operator==(const _mat4 &right) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (right._mat[i][j] != _mat[i][j])

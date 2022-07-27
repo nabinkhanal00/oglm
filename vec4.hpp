@@ -5,15 +5,15 @@
 
 namespace oglm {
 
-template <typename T = float> class _vec4 {
+template <typename T> class _vec4 {
   public:
-	_vec4() : x(0), y(0), z(0), w(0) {}
+	inline _vec4() : x(0), y(0), z(0), w(0) {}
 
-	_vec4(T e0, T e1, T e2, T e3) : x(e0), y(e1), z(e2), w(e3) {}
+	inline _vec4(T e0, T e1, T e2, T e3) : x(e0), y(e1), z(e2), w(e3) {}
 
-	_vec4 operator-() const { return _vec4(-x, -y, -z, -w); }
+	inline _vec4 operator-() const { return _vec4(-x, -y, -z, -w); }
 
-	_vec4 &operator+=(const _vec4 &v) {
+	inline _vec4 &operator+=(const _vec4 &v) {
 		x += v.x;
 		y += v.y;
 		z += v.z;
@@ -21,7 +21,7 @@ template <typename T = float> class _vec4 {
 		return *this;
 	}
 
-	_vec4 &operator-=(const _vec4 &v) {
+	inline _vec4 &operator-=(const _vec4 &v) {
 		x -= v.x;
 		y -= v.y;
 		z -= v.z;
@@ -29,7 +29,7 @@ template <typename T = float> class _vec4 {
 		return *this;
 	}
 
-	_vec4 &operator*=(const float &t) {
+	inline _vec4 &operator*=(const float &t) {
 		x *= t;
 		y *= t;
 		z *= t;
@@ -37,7 +37,7 @@ template <typename T = float> class _vec4 {
 		return *this;
 	}
 
-	_vec4 &operator/=(const float &t) {
+	inline _vec4 &operator/=(const float &t) {
 		x /= t;
 		y /= t;
 		z /= t;
@@ -45,13 +45,15 @@ template <typename T = float> class _vec4 {
 		return *this;
 	}
 
-	_vec4 operator/(float t) { return _vec4(x / t, y / t, z / t, w / t); }
+	inline _vec4 operator/(float t) {
+		return _vec4(x / t, y / t, z / t, w / t);
+	}
 
-	T length() const { return std::sqrt(length_squared()); }
+	inline T length() const { return std::sqrt(length_squared()); }
 
-	T length_squared() const { return x * x + y * y + z * z + w * w; }
+	inline T length_squared() const { return x * x + y * y + z * z + w * w; }
 
-	const T &operator[](const unsigned int &i) const {
+	inline const T &operator[](const unsigned int &i) const {
 		if (i == 0)
 			return x;
 		else if (i == 1)
@@ -63,7 +65,7 @@ template <typename T = float> class _vec4 {
 		else
 			throw("Index out of range");
 	}
-	T &operator[](const unsigned int &i) {
+	inline T &operator[](const unsigned int &i) {
 		if (i == 0)
 			return x;
 		else if (i == 1)
@@ -81,26 +83,27 @@ template <typename T = float> class _vec4 {
 };
 
 template <typename T>
-static std::ostream &operator<<(std::ostream &out, const _vec4<T> &v) {
+inline static std::ostream &operator<<(std::ostream &out, const _vec4<T> &v) {
 	return out << v.x << " " << v.y << " " << v.z << " " << v.w;
 }
 template <typename T>
-static std::istream &operator>>(std::istream &in, _vec4<T> &v) {
+inline static std::istream &operator>>(std::istream &in, _vec4<T> &v) {
 	return in >> v.x >> v.y >> v.z >> v.w;
 }
 template <typename T>
-static _vec4<T> operator+(const _vec4<T> &u, const _vec4<T> &v) {
+inline static _vec4<T> operator+(const _vec4<T> &u, const _vec4<T> &v) {
 	return _vec4<T>(u.x + v.x, u.y + v.y, u.z + v.z, u.w + v.w);
 }
 template <typename T>
-static _vec4<T> operator-(const _vec4<T> &u, const _vec4<T> &v) {
+inline static _vec4<T> operator-(const _vec4<T> &u, const _vec4<T> &v) {
 	return _vec4<T>(u.x - v.x, u.y - v.y, u.z - v.z, u.w - v.w);
 }
-template <typename T> static _vec4<T> operator*(const _vec4<T> &u, float t) {
+template <typename T>
+inline static _vec4<T> operator*(const _vec4<T> &u, float t) {
 	return _vec4<T>(t * u.x, t * u.y, t * u.z, t * u.w);
 }
 template <typename T>
-static _vec4<T> operator*(const float &t, const _vec4<T> &v) {
+inline static _vec4<T> operator*(const float &t, const _vec4<T> &v) {
 	return _vec4<T>(t * v.x, t * v.y, t * v.z, t * v.w);
 }
 

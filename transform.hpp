@@ -15,23 +15,23 @@ inline _mat4<T> lookAt(const _vec3<T> &eye, const _vec3<T> &towards,
 
 	_mat4<T> result;
 	result[0][0] = rightDir.x;
-	result[1][0] = rightDir.y;
-	result[2][0] = rightDir.z;
-	result[3][0] = -dot(rightDir, eye);
+	result[0][1] = rightDir.y;
+	result[0][2] = rightDir.z;
+	result[0][3] = -dot(rightDir, eye);
 
-	result[0][1] = upDir.x;
+	result[1][0] = upDir.x;
 	result[1][1] = upDir.y;
-	result[2][1] = upDir.z;
-	result[3][1] = -dot(upDir, eye);
+	result[1][2] = upDir.z;
+	result[1][3] = -dot(upDir, eye);
 
-	result[0][2] = -forwardDir.x;
-	result[1][2] = -forwardDir.y;
+	result[2][0] = -forwardDir.x;
+	result[2][1] = -forwardDir.y;
 	result[2][2] = -forwardDir.z;
-	result[3][2] = dot(forwardDir, eye);
+	result[2][3] = dot(forwardDir, eye);
 
-	result[0][3] = 0;
-	result[1][3] = 0;
-	result[2][3] = 0;
+	result[3][0] = 0;
+	result[3][1] = 0;
+	result[3][2] = 0;
 	result[3][3] = 1;
 
 	return result;

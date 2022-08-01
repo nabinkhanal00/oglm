@@ -100,13 +100,17 @@ inline static _vec3<T> operator*(const float &t, const _vec3<T> &v) {
 	return _vec3<T>(t * v.x, t * v.y, t * v.z);
 }
 template <typename T>
+inline static _vec3<T> operator*(const _vec3<T> &u, const _vec3<T> &v) {
+	return _vec3<T>(u.x * v.x, u.y * v.y, u.z * v.z);
+}
+template <typename T>
 inline static T dot(const _vec3<T> &u, const _vec3<T> &v) {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 template <typename T>
 inline static _vec3<T> cross(const _vec3<T> &u, const _vec3<T> &v) {
 	return _vec3<T>(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z,
-	                u.x * v.y - u.y * v.z);
+	                u.x * v.y - u.y * v.x);
 }
 template <typename T> inline static _vec3<T> normalize(const _vec3<T> &u) {
 	T oneOverLength = (T)1 / u.length();
